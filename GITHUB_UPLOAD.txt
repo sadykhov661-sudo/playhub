@@ -1,0 +1,21 @@
+KIWIRWE GAMES — версия для GitHub Pages
+
+Загрузи ВСЕ файлы из этого архива в корень репозитория playhub:
+- index.html
+- kiwirwe-logo.png
+- kiwirwe-icon.png
+- robots.txt
+- sitemap.xml
+- README.txt
+
+Не загружай server/ в GitHub Pages: сервер запускается отдельно.
+
+На GitHub:
+1. Открой репозиторий playhub.
+2. Add file → Upload files.
+3. Перетащи все файлы из этого архива.
+4. Если GitHub спросит про замену index.html и других файлов — подтверди.
+5. Commit changes.
+6. Подожди несколько минут, пока GitHub Pages опубликует изменения.
+
+Важно: секретные ключи оплаты в этот архив не входят и не должны попадать в GitHub.
