@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# После получения домена замени example.com на адрес своего сайта:
+# Sitemap: https://example.com/sitemap.xml

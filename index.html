@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0d14">
+<title>PLAYHUB — найди свою следующую игру</title>
+<style>
+:root{--bg:#0b0d14;--panel:#121622;--panel2:#181e2c;--text:#f4f6fb;--muted:#9aa5ba;--accent:#9b7bff;--accent2:#58e1c1;--line:rgba(255,255,255,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#211942 0,transparent 38%),radial-gradient(ellipse at 95% 25%,#102d36 0,transparent 30%),var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.5}
+a{color:inherit;text-decoration:none}.wrap{width:min(1160px,calc(100% - 36px));margin:auto}
+header{position:sticky;top:0;z-index:5;background:rgba(11,13,20,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{font-weight:900;letter-spacing:1px;font-size:1.25rem}.logo span{color:var(--accent2)}.navlinks{display:flex;gap:24px;color:var(--muted);font-size:.94rem}.navlinks a:hover{color:white}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:12px 17px;background:linear-gradient(135deg,var(--accent),#7054e8);color:white;font-weight:750;cursor:pointer;transition:transform .18s,filter .18s}.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}.btn.secondary{background:var(--panel2);border:1px solid var(--line)}
+.hero{padding:76px 0 48px;display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center}.eyebrow{color:var(--accent2);font-weight:800;font-size:.78rem;letter-spacing:2px;text-transform:uppercase}.hero h1{font-size:clamp(2.5rem,6vw,4.7rem);line-height:1.02;letter-spacing:-2px;margin:15px 0 20px}.hero h1 em{font-style:normal;color:var(--accent2)}.hero p{color:var(--muted);font-size:1.08rem;max-width:590px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero-art{min-height:300px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,rgba(155,123,255,.2),rgba(88,225,193,.07)),var(--panel);padding:26px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}.hero-art:before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:var(--accent);filter:blur(85px);opacity:.24;right:-50px;top:-50px}.art-top,.art-bottom{position:relative;z-index:1}.art-symbol{font-size:5.5rem;line-height:1;filter:drop-shadow(0 10px 30px #0005)}.art-label{display:inline-block;background:#ffffff12;border:1px solid var(--line);padding:7px 11px;border-radius:999px;color:#d8ddec;font-size:.82rem}.art-bottom h3{font-size:1.5rem;margin:14px 0 4px}.art-bottom p{font-size:.9rem;margin:0}
+.section{padding:34px 0 48px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.section h2{font-size:clamp(1.6rem,3vw,2.2rem);margin:0}.section-head p{color:var(--muted);margin:5px 0 0}.searchbar{display:flex;gap:10px;margin:20px 0 22px}.searchbar input{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 16px;color:white;font:inherit;outline:none}.searchbar input:focus{border-color:var(--accent)}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}.filter{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:8px 14px;cursor:pointer}.filter.active,.filter:hover{background:#9b7bff22;color:white;border-color:#9b7bff88}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.game{background:linear-gradient(180deg,#151a28,#10141e);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .2s,border-color .2s}.game:hover{transform:translateY(-3px);border-color:#9b7bff88}.game-banner{min-height:130px;padding:22px;display:flex;align-items:flex-start;justify-content:space-between;background:linear-gradient(120deg,#29204b,#152f38)}.game:nth-child(2) .game-banner{background:linear-gradient(120deg,#392a24,#273b35)}.game-icon{font-size:2.7rem}.tag{font-size:.75rem;border-radius:999px;background:#090b12a8;border:1px solid #ffffff20;padding:6px 10px;color:#e6e8f0}.game-content{padding:20px}.game h3{font-size:1.25rem;margin:0 0 7px}.game p{color:var(--muted);margin:0 0 16px;font-size:.93rem}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:17px}.meta span{font-size:.78rem;color:#c3cadd;background:#ffffff08;border:1px solid var(--line);padding:5px 9px;border-radius:8px}.steam-widget{border-top:1px solid var(--line);padding:12px;background:#0b0e16;overflow:hidden}.steam-widget iframe{display:block;width:100%;max-width:646px;height:190px;border:0;margin:auto}
+.empty{display:none;padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px}.note{font-size:.82rem;color:var(--muted);margin-top:16px}.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.how{padding:20px;border-radius:16px;background:var(--panel);border:1px solid var(--line)}.how b{display:block;margin:10px 0 5px}.how p{color:var(--muted);font-size:.9rem;margin:0}.num{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#9b7bff22;color:#c6b7ff;font-weight:900}
+footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:.86rem}.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:48px}.hero-art{min-height:240px}.navlinks{display:none}.grid{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.steam-widget iframe{height:190px}.wrap{width:min(100% - 24px,1160px)}}
+</style>
+<meta name="description" content="PLAYHUB — каталог и рекомендации компьютерных игр. Ищи игры по жанрам, изучай Steam-страницы и находи, во что поиграть.">
+<meta name="keywords" content="игры, компьютерные игры, рекомендации игр, Steam, PLAYHUB, игры на ПК">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="PLAYHUB — рекомендации игр">
+<meta property="og:description" content="Найди свою следующую игру в PLAYHUB.">
+<meta property="og:type" content="website">
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="logo" href="#">PLAY<span>HUB</span></a>
+  <nav class="navlinks"><a href="#games">Игры</a><a href="#recommendations">Подборки</a><a href="#about">О проекте</a></nav>
+  <a class="btn secondary" href="#games">Найти игру ↗</a>
+</div></header>
+<main>
+<section class="wrap hero">
+  <div><div class="eyebrow">Твоя следующая игровая история</div>
+    <h1>Меньше поиска.<br><em>Больше игры.</em></h1>
+    <p>Подборки игр, быстрый поиск и Steam-виджеты в одном месте. Выбирай настроение, находи игру и переходи к ней в Steam.</p>
+    <div class="hero-actions"><a class="btn" href="#games">🎮 Смотреть игры</a><a class="btn secondary" href="#recommendations">Как это работает</a></div>
+  </div>
+  <div class="hero-art"><div class="art-top"><span class="art-label">✦ PLAYHUB PICKS</span></div><div class="art-symbol">🎮</div><div class="art-bottom"><h3>Во что сыграть сегодня?</h3><p>Твоя игровая библиотека начинается здесь.</p></div></div>
+</section>
+<section class="wrap section" id="games">
+  <div class="section-head"><div><h2>Каталог игр</h2><p>Ищи по названию или выбери настроение.</p></div></div>
+  <div class="searchbar"><input id="search" type="search" placeholder="🔎  Например, RV There Yet?"><button class="btn" id="clear">Сбросить</button></div>
+  <div class="filters" aria-label="Фильтры жанров">
+    <button class="filter active" data-filter="all">Все игры</button><button class="filter" data-filter="coop">Кооператив</button><button class="filter" data-filter="horror">Хоррор</button><button class="filter" data-filter="steam">Steam</button>
+  </div>
+  <div class="grid" id="gameGrid">
+    <article class="game" data-name="rv there yet rvthereyet кооператив выживание steam" data-cats="coop steam">
+      <div class="game-banner"><span class="game-icon">🚐</span><span class="tag">КООПЕРАТИВ</span></div>
+      <div class="game-content"><h3>RV There Yet?</h3><p>Добавь игру в список для компании и открой её страницу в Steam. Описание и доступность уточняй на странице магазина.</p><div class="meta"><span>👥 Для компании</span><span>🎮 Steam</span></div></div>
+      <div class="steam-widget"><iframe src="https://store.steampowered.com/widget/3949040/" title="RV There Yet? — Steam" loading="lazy"></iframe></div>
+    </article>
+    <article class="game" data-name="игра из steam steam виджет" data-cats="steam">
+      <div class="game-banner"><span class="game-icon">🕹️</span><span class="tag">ИЗ STEAM</span></div>
+      <div class="game-content"><h3>Ещё одна игра</h3><p>Это твой первый добавленный Steam-виджет. Пришли название игры — заменим заголовок и добавим жанр и описание.</p><div class="meta"><span>🛒 Steam</span><span>✨ В каталоге</span></div></div>
+      <div class="steam-widget"><iframe src="https://store.steampowered.com/widget/1630920/" title="Steam — игра" loading="lazy"></iframe></div>
+    </article>
+  </div>
+  <div class="empty" id="empty">Ничего не найдено. Попробуй другое название или сбрось фильтр.</div>
+  <p class="note">Steam-виджеты загружаются с сайта Steam. Если они не отображаются, проверь доступ к store.steampowered.com.</p>
+</section>
+<section class="wrap section" id="recommendations">
+  <div class="section-head"><div><h2>Как найти игру</h2><p>Простой способ выбрать, во что поиграть дальше.</p></div></div>
+  <div class="how-grid"><div class="how"><div class="num">01</div><b>Выбери настроение</b><p>Хочешь играть с друзьями, искать страшилки или просто изучать каталог?</p></div><div class="how"><div class="num">02</div><b>Найди игру</b><p>Используй поиск и фильтры, чтобы оставить подходящие варианты.</p></div><div class="how"><div class="num">03</div><b>Открой Steam</b><p>Изучи страницу игры, системные требования и актуальную цену.</p></div></div>
+</section>
+<section class="wrap section" id="about"><div class="section-head"><div><h2>О PLAYHUB</h2><p>Небольшой игровой каталог, который мы будем расширять вместе.</p></div></div><p style="max-width:760px;color:var(--muted)">Это стартовая версия сайта. Следующим шагом можно добавить больше игр, обложки, оценки, избранное и отдельные страницы с рекомендациями. Присылай новые Steam HTML-виджеты — добавим их в каталог.</p></section>
+</main>
+<footer><div class="wrap footer-inner"><span>© 2026 PLAYHUB</span><span>Неофициальный каталог. Steam и связанные материалы принадлежат их правообладателям.</span></div></footer>
+<script>
+const search = document.getElementById('search');
+const cards = [...document.querySelectorAll('.game')];
+const filters = [...document.querySelectorAll('.filter')];
+const empty = document.getElementById('empty');
+let activeFilter = 'all';
+function updateGames(){
+  const q = search.value.trim().toLocaleLowerCase('ru');
+  let visible = 0;
+  cards.forEach(card => {
+    const matchesText = card.dataset.name.toLocaleLowerCase('ru').includes(q) || card.querySelector('h3').textContent.toLocaleLowerCase('ru').includes(q);
+    const matchesFilter = activeFilter === 'all' || card.dataset.cats.split(' ').includes(activeFilter);
+    const show = matchesText && matchesFilter;
+    card.style.display = show ? '' : 'none';
+    if(show) visible++;
+  });
+  empty.style.display = visible ? 'none' : 'block';
+}
+search.addEventListener('input', updateGames);
+filters.forEach(btn => btn.addEventListener('click', () => {
+  activeFilter = btn.dataset.filter;
+  filters.forEach(b => b.classList.toggle('active', b === btn));
+  updateGames();
+}));
+document.getElementById('clear').addEventListener('click', () => {
+  search.value = ''; activeFilter = 'all';
+  filters.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+  updateGames();
+});
+</script>
+</body>
+</html>
