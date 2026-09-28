@@ -32,7 +32,7 @@ footer{border-top:1px solid var(--line);padding:30px 20px;color:#778198;text-ali
 <header><div class="nav">
 <div class="logo">PLAY<span>HUB</span></div>
 <nav><a href="#games">Игры</a><a href="#shop">Магазин</a><a href="#donate">Донаты</a></nav>
-<button class="cart" onclick="openCart()">🛒 Корзина <span id="count">0</span></button>
+<button class="cart" onclick="openProfile()">👤 Профиль</button><button class="cart" onclick="openCart()">🛒 Корзина <span id="count">0</span></button>
 </div></header>
 
 <section class="hero">
@@ -68,8 +68,21 @@ footer{border-top:1px solid var(--line);padding:30px 20px;color:#778198;text-ali
 </section>
 </main>
 
-<footer>© 2026 PLAYHUB · Игровой каталог и магазин</footer>
+<section class="wrap" id="account">
+<h2 class="section-title">👤 Личный кабинет</h2>
+<div class="grid">
+<div class="card"><h3>Мой профиль</h3><div class="desc">Демо-профиль PLAYHUB. Настоящая регистрация будет добавлена после подключения серверной базы данных.</div><button class="btn" onclick="openProfile()">Открыть профиль</button></div>
+<div class="card"><h3>📦 Мои заказы</h3><div class="desc" id="ordersText">Заказов пока нет.</div><button class="btn" onclick="showOrders()">История заказов</button></div>
+</div>
+</section>
+<footer>© 2026 PLAYHUB · Игровой каталог и магазин · Демо-версия магазина</footer>
 
+<div class="modal" id="profileModal"><div class="modalbox">
+<h2>👤 Профиль PLAYHUB</h2>
+<p style="color:#9ba5bb">Это демонстрационный профиль. Не вводи сюда пароли, данные карт или другие секреты.</p>
+<div class="notice">Для настоящего аккаунта понадобится отдельный сервер с безопасной авторизацией.</div>
+<div class="row"><button class="close" onclick="closeProfile()">Закрыть</button></div>
+</div></div>
 <div class="modal" id="modal"><div class="modalbox">
 <h2 id="modalTitle">Оформление</h2><p id="modalPrice" style="color:#9ba5bb"></p>
 <input id="email" type="email" placeholder="Email для заказа">
@@ -142,5 +155,8 @@ function buy(title,price){document.getElementById('modalTitle').textContent=titl
 function closeModal(){document.getElementById('modal').classList.remove('open')}
 function demoOrder(){cart++;document.getElementById('count').textContent=cart;alert('Товар добавлен в демонстрационную корзину. Реальную оплату подключим после выбора платёжной системы.');closeModal()}
 function openCart(){alert(cart?'В корзине товаров: '+cart:'Корзина пока пустая.')}
+function openProfile(){document.getElementById('profileModal').classList.add('open')}
+function closeProfile(){document.getElementById('profileModal').classList.remove('open')}
+function showOrders(){alert(cart?'Демо-заказы: '+cart+' товар(а). Настоящая история появится после подключения сервера.':'Заказов пока нет.')}
 </script>
 </body></html>
