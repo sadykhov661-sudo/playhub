@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PLAYHUB — игры, магазин и донаты</title>
-<meta name="description" content="PLAYHUB — каталог игр, игровые товары и донаты.">
+<title>KIWIRWE GAMES — игры, магазин и донаты</title>
+<meta name="description" content="KIWIRWE GAMES — каталог игр, игровые товары и донаты.">
 <style>
 :root{--bg:#080a10;--card:#111522;--card2:#171c2b;--text:#f4f7ff;--muted:#9ba5bb;--accent:#7c5cff;--accent2:#00d4ff;--line:#252c3d}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#1b1740 0,transparent 35%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
@@ -30,13 +30,13 @@ footer{border-top:1px solid var(--line);padding:30px 20px;color:#778198;text-ali
 </head>
 <body>
 <header><div class="nav">
-<div class="logo">PLAY<span>HUB</span></div>
+<div class="logo">KIWIRWE<span> GAMES</span></div>
 <nav><a href="#games">Игры</a><a href="#shop">Магазин</a><a href="#donate">Донаты</a></nav>
 <button class="cart" onclick="openProfile()">👤 Профиль</button><button class="cart" onclick="openCart()">🛒 Корзина <span id="count">0</span></button>
 </div></header>
 
 <section class="hero">
-<h1>ИГРЫ.<br><span style="color:#00d4ff">МАГАЗИН.</span><br>PLAYHUB.</h1>
+<h1>ИГРЫ.<br><span style="color:#00d4ff">МАГАЗИН.</span><br>KIWIRWE GAMES.</h1>
 <p>Каталог игр, игровые товары и витрина донатов в одном месте. Сейчас магазин работает как демонстрационная версия — реальные платежи подключаются отдельно.</p>
 <a class="btn" href="#shop">Открыть магазин</a>
 </section>
@@ -48,11 +48,23 @@ footer{border-top:1px solid var(--line);padding:30px 20px;color:#778198;text-ali
 <div class="grid" id="gamesGrid"></div>
 </section>
 
+
+<section id="steam-catalog">
+<h2 class="section-title">🔥 Весь каталог Steam</h2>
+<div class="sub">Динамический поиск по каталогу Steam. Результаты подгружаются с сервера, поэтому не нужно хранить сотни тысяч карточек в HTML.</div>
+<div class="controls">
+<input class="search" id="steamSearch" placeholder="Поиск по играм Steam...">
+<button class="btn" id="steamSearchBtn">Найти</button>
+</div>
+<div id="steamStatus" class="notice">Введите название игры и нажмите «Найти».</div>
+<div class="grid" id="steamGrid"></div>
+</section>
+
 <section id="shop">
-<h2 class="section-title">🛒 Магазин PLAYHUB</h2><div class="sub">Пример товаров, которые можно подключить к настоящей системе оплаты.</div>
+<h2 class="section-title">🛒 Магазин KIWIRWE GAMES</h2><div class="sub">Пример товаров, которые можно подключить к настоящей системе оплаты.</div>
 <div class="notice">⚠️ Кнопки ниже пока демонстрационные: сайт на GitHub Pages не должен сам обрабатывать данные банковских карт. Для реальных оплат понадобится платёжный сервис и серверная часть.</div>
 <div class="grid">
-<div class="card shop-card"><span class="badge">PLAYHUB</span><h3>PLAYHUB Premium</h3><div class="tag">Премиум-функции сайта</div><div class="desc">Пример собственной подписки: дополнительные функции, оформление профиля и бонусы.</div><div class="price">199 ₽ / мес.</div><button class="btn" onclick="buy('PLAYHUB Premium','199 ₽')">Оформить</button></div>
+<div class="card shop-card"><span class="badge">KIWIRWE <span>GAMES</span><h3>KIWIRWE GAMES Premium</h3><div class="tag">Премиум-функции сайта</div><div class="desc">Пример собственной подписки: дополнительные функции, оформление профиля и бонусы.</div><div class="price">199 ₽ / мес.</div><button class="btn" onclick="buy('KIWIRWE GAMES Premium','199 ₽')">Оформить</button></div>
 <div class="card shop-card"><span class="badge">ПОДАРОК</span><h3>Подарочный код</h3><div class="tag">Цифровой товар</div><div class="desc">Здесь можно разместить собственные цифровые товары или официально разрешённые к продаже коды.</div><div class="price">от 300 ₽</div><button class="btn" onclick="buy('Подарочный код','от 300 ₽')">Оформить</button></div>
 <div class="card shop-card"><span class="badge">ДОНАТ</span><h3>Игровой донат</h3><div class="tag">Пополнение</div><div class="desc">Раздел для игр, где пополнение через сторонний магазин разрешено разработчиком.</div><div class="price">от 100 ₽</div><button class="btn" onclick="buy('Игровой донат','от 100 ₽')">Выбрать</button></div>
 </div>
@@ -71,14 +83,14 @@ footer{border-top:1px solid var(--line);padding:30px 20px;color:#778198;text-ali
 <section class="wrap" id="account">
 <h2 class="section-title">👤 Личный кабинет</h2>
 <div class="grid">
-<div class="card"><h3>Мой профиль</h3><div class="desc">Демо-профиль PLAYHUB. Настоящая регистрация будет добавлена после подключения серверной базы данных.</div><button class="btn" onclick="openProfile()">Открыть профиль</button></div>
+<div class="card"><h3>Мой профиль</h3><div class="desc">Демо-профиль KIWIRWE GAMES. Настоящая регистрация будет добавлена после подключения серверной базы данных.</div><button class="btn" onclick="openProfile()">Открыть профиль</button></div>
 <div class="card"><h3>📦 Мои заказы</h3><div class="desc" id="ordersText">Заказов пока нет.</div><button class="btn" onclick="showOrders()">История заказов</button></div>
 </div>
 </section>
-<footer>© 2026 PLAYHUB · Игровой каталог и магазин · Демо-версия магазина</footer>
+<footer>© 2026 KIWIRWE GAMES · Игровой каталог и магазин · Демо-версия магазина</footer>
 
 <div class="modal" id="profileModal"><div class="modalbox">
-<h2>👤 Профиль PLAYHUB</h2>
+<h2>👤 Профиль KIWIRWE GAMES</h2>
 <p style="color:#9ba5bb">Это демонстрационный профиль. Не вводи сюда пароли, данные карт или другие секреты.</p>
 <div class="notice">Для настоящего аккаунта понадобится отдельный сервер с безопасной авторизацией.</div>
 <div class="row"><button class="close" onclick="closeProfile()">Закрыть</button></div>
@@ -153,10 +165,61 @@ document.getElementById('search').addEventListener('input',render);document.getE
 let cart=0;
 function buy(title,price){document.getElementById('modalTitle').textContent=title;document.getElementById('modalPrice').textContent='Цена: '+price;document.getElementById('modal').classList.add('open')}
 function closeModal(){document.getElementById('modal').classList.remove('open')}
-function demoOrder(){cart++;document.getElementById('count').textContent=cart;alert('Товар добавлен в демонстрационную корзину. Реальную оплату подключим после выбора платёжной системы.');closeModal()}
+async function demoOrder(){
+  const email=document.getElementById('email').value.trim();
+  if(!email){alert('Укажи email для заказа.');return;}
+  const title=document.getElementById('modalTitle').textContent;
+  const priceText=document.getElementById('modalPrice').textContent;
+  const match=priceText.match(/([0-9]+(?:[.,][0-9]+)?)/);
+  const amount=match?Number(match[1].replace(',','.')):199;
+  try{
+    const r=await fetch('/api/create-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title,email,amount})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Не удалось создать платеж');
+    if(data.confirmation_url) location.href=data.confirmation_url;
+    else alert('Платёж создан, но ссылка не получена.');
+  }catch(e){alert('Сервер оплаты пока не подключён: '+e.message)}
+}
 function openCart(){alert(cart?'В корзине товаров: '+cart:'Корзина пока пустая.')}
 function openProfile(){document.getElementById('profileModal').classList.add('open')}
 function closeProfile(){document.getElementById('profileModal').classList.remove('open')}
 function showOrders(){alert(cart?'Демо-заказы: '+cart+' товар(а). Настоящая история появится после подключения сервера.':'Заказов пока нет.')}
+
+const steamSearchInput=document.getElementById('steamSearch');
+const steamSearchBtn=document.getElementById('steamSearchBtn');
+const steamStatus=document.getElementById('steamStatus');
+const steamGrid=document.getElementById('steamGrid');
+
+async function searchSteam(){
+  const q=steamSearchInput.value.trim();
+  if(!q){ steamStatus.textContent='Введите название игры.'; steamGrid.innerHTML=''; return; }
+  steamStatus.textContent='Ищу в каталоге Steam...';
+  steamGrid.innerHTML='';
+  try{
+    const r=await fetch('/api/steam/search?q='+encodeURIComponent(q)+'&limit=48');
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Ошибка сервера');
+    if(!data.items.length){
+      steamStatus.textContent='Ничего не найдено.';
+      return;
+    }
+    steamStatus.textContent=`Найдено: ${data.items.length}.`;
+    steamGrid.innerHTML=data.items.map(x=>`
+      <div class="card">
+        <h3>${escapeHtml(x.name)}</h3>
+        <div class="tag">Steam AppID: ${x.appid}</div>
+        <div class="desc">Официальная страница приложения в Steam.</div>
+        <a class="btn" target="_blank" rel="noopener" href="https://store.steampowered.com/app/${x.appid}/">Открыть в Steam</a>
+      </div>`).join('');
+  }catch(e){
+    steamStatus.textContent='Не удалось получить каталог: '+e.message;
+  }
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+steamSearchBtn.addEventListener('click',searchSteam);
+steamSearchInput.addEventListener('keydown',e=>{if(e.key==='Enter')searchSteam();});
+
 </script>
 </body></html>
