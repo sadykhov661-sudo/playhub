@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-
-# После получения домена замени example.com на адрес своего сайта:
-# Sitemap: https://example.com/sitemap.xml
+Sitemap: https://sadykhov661-sudo.github.io/playhub/sitemap.xml
