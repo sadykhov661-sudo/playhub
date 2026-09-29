@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KIWIRWE GAMES — игры, магазин и донаты</title>
+<title>KIWIRWE GAMES — игры и магазин</title>
 <link rel="icon" type="image/png" href="kiwirwe-logo.png">
-<meta name="description" content="KIWIRWE GAMES — каталог игр, игровые товары и донаты.">
+<meta name="description" content="KIWIRWE GAMES — каталог игр и игровой магазин.">
 <style>
 :root{--bg:#080a10;--card:#111522;--card2:#171c2b;--text:#f4f7ff;--muted:#9ba5bb;--accent:#7c5cff;--accent2:#00d4ff;--line:#252c3d}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#1b1740 0,transparent 35%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
@@ -114,7 +114,7 @@ footer{background:#04060a;border-color:var(--line)}
 <body>
 <header><div class="nav">
 <div class="logo"><img src="kiwirwe-logo.png" alt="KIWIRWE GAMES logo"><div class="logo-text">KIWIRWE<span> GAMES</span></div></div>
-<nav><a href="#games">Игры</a><a href="#shop">Магазин</a><a href="#donate">Донаты</a></nav>
+<nav><a href="#games">Игры</a><a href="#shop">Магазин</a></nav>
 <button class="cart" onclick="openProfile()">👤 Профиль</button><button class="cart" onclick="openCart()">🛒 Корзина <span id="count">0</span></button>
 </div></header>
 
@@ -149,18 +149,10 @@ footer{background:#04060a;border-color:var(--line)}
 <div class="grid">
 <div class="card shop-card"><span class="badge">KIWIRWE <span>GAMES</span><h3>KIWIRWE GAMES Premium</h3><div class="tag">Премиум-функции сайта</div><div class="desc">Пример собственной подписки: дополнительные функции, оформление профиля и бонусы.</div><div class="price">199 ₽ / мес.</div><button class="btn" onclick="buy('KIWIRWE GAMES Premium','199 ₽')">Оформить</button></div>
 <div class="card shop-card"><span class="badge">ПОДАРОК</span><h3>Подарочный код</h3><div class="tag">Цифровой товар</div><div class="desc">Здесь можно разместить собственные цифровые товары или официально разрешённые к продаже коды.</div><div class="price">от 300 ₽</div><button class="btn" onclick="buy('Подарочный код','от 300 ₽')">Оформить</button></div>
-<div class="card shop-card"><span class="badge">ДОНАТ</span><h3>Игровой донат</h3><div class="tag">Пополнение</div><div class="desc">Раздел для игр, где пополнение через сторонний магазин разрешено разработчиком.</div><div class="price">от 100 ₽</div><button class="btn" onclick="buy('Игровой донат','от 100 ₽')">Выбрать</button></div>
-</div>
+
 </section>
 
-<section id="donate">
-<h2 class="section-title">💎 Донаты в игры</h2><div class="sub">Можно сделать отдельную форму выбора игры и суммы. Фактическая выдача должна идти через разрешённый разработчиком/поставщиком способ.</div>
-<div class="grid">
-<div class="card"><h3>🎯 Counter-Strike 2</h3><div class="desc">Раздел можно использовать для разрешённых игровых товаров и сервисов. Покупка Steam-аккаунтов или передача аккаунтов не предусмотрена.</div><div class="price">от 100 ₽</div><button class="btn" onclick="buy('Донат CS2','от 100 ₽')">Открыть</button></div>
-<div class="card"><h3>🦸 Marvel Rivals</h3><div class="desc">Пример карточки игрового доната. Реальная интеграция требует официального поставщика/API или другого разрешённого способа.</div><div class="price">от 100 ₽</div><button class="btn" onclick="buy('Донат Marvel Rivals','от 100 ₽')">Открыть</button></div>
-<div class="card"><h3>🎮 Другие игры</h3><div class="desc">Добавим столько игр, сколько потребуется, когда определимся с разрешёнными товарами и способом их выдачи.</div><div class="price">от 100 ₽</div><button class="btn" onclick="buy('Другой игровой донат','от 100 ₽')">Выбрать</button></div>
-</div>
-</section>
+
 </main>
 
 <section class="wrap" id="account">
