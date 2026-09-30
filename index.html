@@ -526,4 +526,126 @@ steamSearchBtn.addEventListener('click',searchSteam);
 steamSearchInput.addEventListener('keydown',e=>{if(e.key==='Enter')searchSteam();});
 
 </script>
+
+<section id="matches" class="kw-matches">
+  <div class="kw-matches-head">
+    <div>
+      <div class="kw-kicker">KIWIRWE GAMES • CS2</div>
+      <h2>⚔️ Матчи</h2>
+      <p>Создавай лобби, приглашай друзей и играй свои кастомные матчи.</p>
+    </div>
+    <button class="kw-create" onclick="kwOpenCreate()">+ Создать матч</button>
+  </div>
+
+  <div class="kw-tabs">
+    <button class="kw-tab active" onclick="kwFilter('all',this)">Все</button>
+    <button class="kw-tab" onclick="kwFilter('5v5',this)">5×5</button>
+    <button class="kw-tab" onclick="kwFilter('1v1',this)">1×1</button>
+    <button class="kw-tab" onclick="kwFilter('aim',this)">Тренировка</button>
+  </div>
+
+  <div id="kwMatchList" class="kw-match-grid"></div>
+  <div id="kwEmpty" class="kw-empty" style="display:none">Пока нет матчей этого типа.</div>
+</section>
+
+<div id="kwCreateModal" class="kw-modal" style="display:none">
+  <div class="kw-modal-card">
+    <button class="kw-close" onclick="kwCloseCreate()">×</button>
+    <h3>Создать матч</h3>
+    <label>Название<input id="kwName" placeholder="Например: Вечерний CS2"></label>
+    <label>Режим
+      <select id="kwMode">
+        <option value="5v5">5×5</option>
+        <option value="1v1">1×1</option>
+        <option value="aim">Тренировка</option>
+      </select>
+    </label>
+    <label>Карта
+      <select id="kwMap">
+        <option>Mirage</option><option>Dust II</option><option>Inferno</option>
+        <option>Nuke</option><option>Ancient</option><option>Overpass</option>
+      </select>
+    </label>
+    <button class="kw-create full" onclick="kwCreateMatch()">Создать лобби</button>
+    <p class="kw-note">Демо-режим: лобби сохраняются в браузере. Для настоящего онлайн-матчмейкинга понадобится сервер.</p>
+  </div>
+</div>
+
+<style>
+.kw-matches{margin:55px auto;padding:28px;max-width:1200px;background:linear-gradient(145deg,#151515,#0c0c0c);border:1px solid #292929;border-radius:22px;box-shadow:0 15px 50px #0008}
+.kw-matches-head{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.kw-kicker{font-size:12px;color:#ff4747;font-weight:800;letter-spacing:2px}
+.kw-matches h2{font-size:34px;margin:5px 0}
+.kw-matches p{color:#aaa;margin:0}
+.kw-create{border:0;background:#e52b2b;color:#fff;padding:13px 18px;border-radius:10px;font-weight:800;cursor:pointer}
+.kw-create:hover{background:#ff3d3d}
+.kw-tabs{display:flex;gap:8px;margin:24px 0}
+.kw-tab{border:1px solid #333;background:#151515;color:#bbb;padding:9px 15px;border-radius:9px;cursor:pointer}
+.kw-tab.active{background:#e52b2b;color:#fff;border-color:#e52b2b}
+.kw-match-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kw-card{background:#111;border:1px solid #292929;border-radius:15px;padding:17px}
+.kw-card-top{display:flex;justify-content:space-between;align-items:center}
+.kw-status{font-size:11px;background:#17351f;color:#70e090;padding:5px 8px;border-radius:20px}
+.kw-card h3{margin:12px 0 6px}
+.kw-meta{display:flex;gap:8px;flex-wrap:wrap;color:#aaa;font-size:13px}
+.kw-pill{background:#1b1b1b;padding:5px 8px;border-radius:7px}
+.kw-join{margin-top:15px;width:100%;padding:10px;border:0;border-radius:9px;background:#242424;color:#fff;cursor:pointer;font-weight:700}
+.kw-join:hover{background:#e52b2b}
+.kw-empty{text-align:center;color:#888;padding:35px}
+.kw-modal{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.kw-modal-card{position:relative;width:min(450px,100%);background:#111;border:1px solid #333;border-radius:18px;padding:25px}
+.kw-modal-card h3{margin-top:0;font-size:25px}
+.kw-modal-card label{display:block;color:#bbb;margin:14px 0}
+.kw-modal-card input,.kw-modal-card select{display:block;width:100%;box-sizing:border-box;margin-top:7px;background:#191919;color:#fff;border:1px solid #333;border-radius:8px;padding:11px}
+.kw-close{position:absolute;right:15px;top:10px;background:none;border:0;color:#aaa;font-size:28px;cursor:pointer}
+.kw-full,.kw-create.full{width:100%;margin-top:8px}
+.kw-note{font-size:12px!important;color:#777!important;margin-top:15px!important}
+@media(max-width:800px){.kw-match-grid{grid-template-columns:1fr 1fr}.kw-matches-head{align-items:flex-start;flex-direction:column}}
+@media(max-width:520px){.kw-match-grid{grid-template-columns:1fr}.kw-matches{padding:18px}}
+</style>
+
+<script>
+(function(){
+  const defaults=[
+    {name:"Вечерний Mirage",mode:"5v5",map:"Mirage",players:6,max:10,host:"KIWIRWE"},
+    {name:"Fast 1v1",mode:"1v1",map:"Dust II",players:1,max:2,host:"Player"},
+    {name:"Aim Practice",mode:"aim",map:"Aim",players:3,max:8,host:"KIWIRWE"},
+    {name:"Nuke 5×5",mode:"5v5",map:"Nuke",players:8,max:10,host:"Kiwirwe"}
+  ];
+  let custom=JSON.parse(localStorage.getItem("kw_matches")||"[]");
+  let current="all";
+  window.kwFilter=function(mode,btn){
+    current=mode;
+    document.querySelectorAll(".kw-tab").forEach(x=>x.classList.remove("active"));
+    btn.classList.add("active"); render();
+  };
+  function render(){
+    const list=defaults.concat(custom).filter(x=>current==="all"||x.mode===current);
+    const box=document.getElementById("kwMatchList"), empty=document.getElementById("kwEmpty");
+    box.innerHTML=list.map((m,i)=>`<article class="kw-card">
+      <div class="kw-card-top"><span class="kw-status">Открыт</span><span class="kw-pill">${m.mode}</span></div>
+      <h3>${escapeHtml(m.name)}</h3>
+      <div class="kw-meta"><span class="kw-pill">🗺 ${escapeHtml(m.map)}</span><span class="kw-pill">👥 ${m.players}/${m.max}</span></div>
+      <div class="kw-meta" style="margin-top:8px">Создатель: ${escapeHtml(m.host)}</div>
+      <button class="kw-join" onclick="kwJoin('${encodeURIComponent(m.name)}')">Присоединиться</button>
+    </article>`).join("");
+    empty.style.display=list.length?"none":"block";
+  }
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+  window.kwOpenCreate=()=>document.getElementById("kwCreateModal").style.display="flex";
+  window.kwCloseCreate=()=>document.getElementById("kwCreateModal").style.display="none";
+  window.kwCreateMatch=function(){
+    const name=document.getElementById("kwName").value.trim()||"Новый матч";
+    const mode=document.getElementById("kwMode").value;
+    const map=document.getElementById("kwMap").value;
+    const max=mode==="5v5"?10:(mode==="1v1"?2:8);
+    custom.unshift({name,mode,map,players:1,max,host:"Ты"});
+    localStorage.setItem("kw_matches",JSON.stringify(custom));
+    kwCloseCreate(); current="all"; document.querySelectorAll(".kw-tab").forEach(x=>x.classList.remove("active")); document.querySelector(".kw-tab").classList.add("active"); render();
+  };
+  window.kwJoin=function(name){alert("Лобби «"+decodeURIComponent(name)+"» выбрано. В демо-версии подключение к CS2 не выполняется.");};
+  render();
+})();
+</script>
+
 </body></html>
